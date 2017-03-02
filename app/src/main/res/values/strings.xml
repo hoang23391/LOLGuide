@@ -1,0 +1,42 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">LOL Guide</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="truyenthuyet">Truyền Thuyết</string>
+    <string name="serverna">Server NA</string>
+    <string name="noidungtruyenthuyet">Nội dung Truyền Thuyết</string>
+    <string name="servervn">Server VN</string>
+    <string name="success">Success</string>
+    <string name="action_previous">Previous</string>
+    <string name="action_next">Next</string>
+    <string name="action_finish">Finish</string>
+    <string name="title_template_step">Step <xliff:g id="step_number">%1$d</xliff:g>: Lorem   Ipsum</string>
+    <string name="armor">Giáp</string>
+    <string name="attackdamage">Sát thương</string>
+    <string name="attackrange">Tầm đánh</string>
+    <string name="attackspeedoffset">Tốc độ đánh</string>
+    <string name="crit">Chí mạng</string>
+    <string name="hp">Máu</string>
+    <string name="hpregen">Hồi máu</string>
+    <string name="movespeed">Tốc độ di chuyển</string>
+    <string name="mp">Năng lượng</string>
+    <string name="mpregen">Hồi năng lượng</string>
+    <string name="spellblock">Kháng phép</string>
+    <string name="tuong">Tướng</string>
+    <string name="solieu">Số liệu</string>
+    <string name="kinang">Kĩ năng</string>
+    <string name="video">Video</string>
+    <string name="tenkinang">Tên kĩ năng</string>
+    <string name="phimtatkinang">Phím tắt</string>
+    <string name="noidungkinang">Nội dung kĩ năng</string>
+    <string name="passive">Passive</string>
+    <string name="q">Q</string>
+    <string name="w">W</string>
+    <string name="e">E</string>
+    <string name="r">R</string>
+    <string name="dongdoi">ĐỒNG ĐỘI</string>
+    <string name="doithu">ĐỐI THỦ</string>
+    <string name="giaidoan">Giai Đoạn</string>
+
+</resources>

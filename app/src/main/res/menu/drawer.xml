@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/navigation_item_1"
+            android:checked="true"
+            android:icon="@android:drawable/ic_menu_close_clear_cancel"
+            android:title="News" />
+        <item
+            android:id="@+id/navigation_item_5"
+            android:icon="@drawable/ic_action_add"
+            android:title="Champion Free" />
+        <item
+            android:id="@+id/navigation_item_2"
+            android:icon="@drawable/ic_action_add"
+            android:title="Champion" />
+    </group>
+
+    <item android:title="Săm soi">
+        <menu>
+            <item
+                android:id="@+id/navigation_item_3"
+                android:icon="@android:drawable/ic_menu_add"
+                android:title="Server VN" />
+            <item
+                android:id="@+id/navigation_item_4"
+                android:icon="@android:drawable/ic_menu_add"
+                android:title="NA-KR-JP-..." />
+        </menu>
+    </item>
+
+
+        <item
+            android:id="@+id/tttacgia"
+            android:checked="true"
+            android:icon="@android:drawable/ic_menu_close_clear_cancel"
+            android:title="Liên hệ" />
+
+
+
+
+
+</menu>

@@ -1,0 +1,28 @@
+https://developer.riotgames.com/docs/static-data
+
+Splash :
+http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg
+
+Champions (Loading Screen Art):
+http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg
+
+Champions (Square):
+http://ddragon.leagueoflegends.com/cdn/7.4.3/img/champion/Aatrox.png
+
+Passive Abilities:
+http://ddragon.leagueoflegends.com/cdn/7.4.3/img/passive/Anivia_P.png
+
+Champion Abilities:
+http://ddragon.leagueoflegends.com/cdn/7.4.3/img/spell/FlashFrost.png
+
+Summoner Spells:
+http://ddragon.leagueoflegends.com/cdn/7.4.3/img/spell/SummonerFlash.png
+
+Items:
+http://ddragon.leagueoflegends.com/cdn/7.4.3/img/item/1001.png
+
+Masteries:
+http://ddragon.leagueoflegends.com/cdn/7.4.3/img/mastery/6111.png
+
+Runes:
+http://ddragon.leagueoflegends.com/cdn/7.4.3/img/rune/8001.png
