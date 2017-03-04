@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,29 @@ public class SamSoiVNFragment extends Fragment {
         webSettings.setJavaScriptEnabled(true);
         // Force links and redirects to open in the WebView instead of in a browser
         wvSamSoiVN.setWebViewClient(new WebViewClient());
+
+        wvSamSoiVN.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+
+
+                    switch(keyCode)
+                    {
+                        case KeyEvent.KEYCODE_BACK:
+                            if(wvSamSoiVN.canGoBack())
+                            {
+                                wvSamSoiVN.goBack();
+                                return true;
+                            }
+                            break;
+                    }
+                }
+
+                return false;
+            }
+        });
         return v;
     }
 

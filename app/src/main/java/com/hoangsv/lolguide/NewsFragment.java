@@ -114,12 +114,15 @@ public class NewsFragment extends Fragment {
     }
 
     private void addEvents() {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                new DocXML().execute(url);
-            }
-        });
+
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    new DocXML().execute(url);
+                }
+            });
+
 
         rvNews.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rvNews, new ClickListener() {
             @Override
