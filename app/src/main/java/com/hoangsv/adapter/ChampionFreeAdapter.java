@@ -1,9 +1,6 @@
 package com.hoangsv.adapter;
 
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,21 +9,24 @@ import android.widget.ImageView;
 
 import com.hoangsv.lolguide.R;
 import com.hoangsv.model.ChampionFree;
+import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ChampionFreeAdapter extends RecyclerView.Adapter<ChampionFreeAdapter.ViewHolder> {
+    private Activity context;
     private List<ChampionFree> danhSachChampionFree;
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView imgChampionFree;
+        @BindView(R.id.imgChampionFree) ImageView imgChampionFree;
 
         public ViewHolder(View view) {
             super(view);
-            imgChampionFree= (ImageView) view.findViewById(R.id.imgChampionFree);
+            ButterKnife.bind(this,view);
         }
 
         @Override
@@ -35,7 +35,8 @@ public class ChampionFreeAdapter extends RecyclerView.Adapter<ChampionFreeAdapte
         }
     }
 
-    public ChampionFreeAdapter(List<ChampionFree> danhSachChampionFree) {
+    public ChampionFreeAdapter(Activity context, List<ChampionFree> danhSachChampionFree) {
+        this.context = context;
         this.danhSachChampionFree = danhSachChampionFree;
     }
 
@@ -50,6 +51,9 @@ public class ChampionFreeAdapter extends RecyclerView.Adapter<ChampionFreeAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         ChampionFree championFree=danhSachChampionFree.get(position);
 
+        Picasso.with(context).load("file:///android_asset/app/champion/"+championFree.getImage()).into(holder.imgChampionFree);
+
+        /*
         AssetManager assetManager = holder.imgChampionFree.getContext().getAssets();
         try {
             InputStream open = assetManager.open("app/champion/"+championFree.getImage());
@@ -59,6 +63,7 @@ public class ChampionFreeAdapter extends RecyclerView.Adapter<ChampionFreeAdapte
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
     }
 
     @Override

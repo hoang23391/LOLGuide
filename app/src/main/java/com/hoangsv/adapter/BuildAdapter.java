@@ -14,6 +14,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by User on 3/2/2017.
  */
@@ -71,17 +74,17 @@ public class BuildAdapter extends RecyclerView.Adapter<BuildAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView txtGiaiDoan;
-        ImageView imgDo1, imgDo2, imgDo3, imgDo4, imgDo5, imgDo6;
+        @BindView(R.id.txtGiaiDoan) TextView txtGiaiDoan;
+        @BindView(R.id.imgDo1) ImageView imgDo1;
+        @BindView(R.id.imgDo2) ImageView imgDo2;
+        @BindView(R.id.imgDo3) ImageView imgDo3;
+        @BindView(R.id.imgDo4) ImageView imgDo4;
+        @BindView(R.id.imgDo5) ImageView imgDo5;
+        @BindView(R.id.imgDo6) ImageView imgDo6;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            txtGiaiDoan = (TextView) itemView.findViewById(R.id.txtGiaiDoan);
-            imgDo1 = (ImageView) itemView.findViewById(R.id.imgDo1);
-            imgDo2 = (ImageView) itemView.findViewById(R.id.imgDo2);
-            imgDo3 = (ImageView) itemView.findViewById(R.id.imgDo3);
-            imgDo4 = (ImageView) itemView.findViewById(R.id.imgDo4);
-            imgDo5 = (ImageView) itemView.findViewById(R.id.imgDo5);
-            imgDo6 = (ImageView) itemView.findViewById(R.id.imgDo6);
+            ButterKnife.bind(this,itemView);
         }
 
         @Override

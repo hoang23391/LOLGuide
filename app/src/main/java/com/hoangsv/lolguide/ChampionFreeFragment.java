@@ -120,7 +120,7 @@ public class ChampionFreeFragment extends Fragment {
         rvChampionFree.addItemDecoration(new DividerItemDecoration(getActivity(), GridLayoutManager.VERTICAL));
         dsChampionFree=new ArrayList<>();
         // Setting the adapter.
-        adapterChampionFree = new ChampionFreeAdapter(dsChampionFree);
+        adapterChampionFree = new ChampionFreeAdapter(getActivity(),dsChampionFree);
         rvChampionFree.setAdapter(adapterChampionFree);
 
 
@@ -136,7 +136,7 @@ public class ChampionFreeFragment extends Fragment {
         rvChampionFreeVN.addItemDecoration(new DividerItemDecoration(getActivity(), GridLayoutManager.VERTICAL));
         dsChampionFreeVN=new ArrayList<>();
         // Setting the adapter.
-        adapterChampionFreeVN = new ChampionFreeAdapter(dsChampionFreeVN);
+        adapterChampionFreeVN = new ChampionFreeAdapter(getActivity(),dsChampionFreeVN);
         rvChampionFreeVN.setAdapter(adapterChampionFreeVN);
 
         database = Database.initDatabase(getActivity(),DATABASE_NAME);
