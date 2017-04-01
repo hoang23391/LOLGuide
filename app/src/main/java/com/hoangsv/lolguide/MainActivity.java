@@ -28,17 +28,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferencesVersion;
     final String DATABASE_NAME="lol.sqlite";
     SQLiteDatabase database;
 
-    private static String urlversion="https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key=RGAPI-2a7f3ae1-d188-4a69-bcc4-132f4de02f44";
-    private static String url = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?locale=vn_VN&champData=all&api_key=RGAPI-2a7f3ae1-d188-4a69-bcc4-132f4de02f44";
-    private static String urlitem="https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?locale=vn_VN&itemListData=all&api_key=RGAPI-2a7f3ae1-d188-4a69-bcc4-132f4de02f44";
-    private static String urlmastery="https://global.api.pvp.net/api/lol/static-data/na/v1.2/mastery?locale=vn_VN&api_key=RGAPI-2a7f3ae1-d188-4a69-bcc4-132f4de02f44";
-    private static String urlsummonerspell="https://global.api.pvp.net/api/lol/static-data/na/v1.2/summoner-spell?locale=vn_VN&api_key=RGAPI-2a7f3ae1-d188-4a69-bcc4-132f4de02f44";
-    private static String urlrune="https://global.api.pvp.net/api/lol/static-data/na/v1.2/rune?locale=vn_VN&api_key=RGAPI-2a7f3ae1-d188-4a69-bcc4-132f4de02f44";
+    private static String API_KEY = "RGAPI-2a7f3ae1-d188-4a69-bcc4-132f4de02f44";
+
+    private static String urlversion="https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key="+API_KEY;
+    private static String url = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?locale=vn_VN&champData=all&api_key="+API_KEY;
+    private static String urlitem="https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?locale=vn_VN&itemListData=all&api_key="+API_KEY;
+    private static String urlmastery="https://global.api.pvp.net/api/lol/static-data/na/v1.2/mastery?locale=vn_VN&api_key="+API_KEY;
+    private static String urlsummonerspell="https://global.api.pvp.net/api/lol/static-data/na/v1.2/summoner-spell?locale=vn_VN&api_key="+API_KEY;
+    private static String urlrune="https://global.api.pvp.net/api/lol/static-data/na/v1.2/rune?locale=vn_VN&api_key="+API_KEY;
 
 
     private Toolbar mToolbar;
@@ -263,6 +271,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+
             try {
                 JSONArray root=new JSONArray(s);
                 String versionFromURL=root.getString(0);
@@ -308,9 +317,23 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            HttpHandler httpHandler=new HttpHandler();
-            String url1=httpHandler.makeServiceCall(params[0]);
-            return url1;
+//            Su dung HttpUrlConnect
+//            HttpHandler httpHandler=new HttpHandler();
+//            String url1=httpHandler.makeServiceCall(params[0]);
+//            return url1;
+
+            try {
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request.Builder reqBuilder = new Request.Builder();
+                reqBuilder.url(params[0]);
+                Request request = reqBuilder.build();
+                Response response = okHttpClient.newCall(request).execute();
+                String kqTraVe = response.body().string();
+                return kqTraVe;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 
@@ -322,9 +345,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            //Toast.makeText(MainActivity.this,s,Toast.LENGTH_LONG).show();
-
-            //Toast.makeText(RecyclerActivity.this,sharedPreferences.getString("JSONCHAMPION",""),Toast.LENGTH_LONG).show();
 
             try {
                 JSONObject root=new JSONObject(s);
@@ -379,9 +399,23 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            HttpHandler httpHandler=new HttpHandler();
-            String url1=httpHandler.makeServiceCall(params[0]);
-            return url1;
+//            Su dung HttpUrlConnect
+//            HttpHandler httpHandler=new HttpHandler();
+//            String url1=httpHandler.makeServiceCall(params[0]);
+//            return url1;
+
+            try {
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request.Builder reqBuilder = new Request.Builder();
+                reqBuilder.url(params[0]);
+                Request request = reqBuilder.build();
+                Response response = okHttpClient.newCall(request).execute();
+                String kqTraVe = response.body().string();
+                return kqTraVe;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 
@@ -453,9 +487,23 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            HttpHandler httpHandler=new HttpHandler();
-            String url1=httpHandler.makeServiceCall(params[0]);
-            return url1;
+//            Su dung HttpUrlConnect
+//            HttpHandler httpHandler=new HttpHandler();
+//            String url1=httpHandler.makeServiceCall(params[0]);
+//            return url1;
+
+            try {
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request.Builder reqBuilder = new Request.Builder();
+                reqBuilder.url(params[0]);
+                Request request = reqBuilder.build();
+                Response response = okHttpClient.newCall(request).execute();
+                String kqTraVe = response.body().string();
+                return kqTraVe;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 
@@ -519,9 +567,23 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            HttpHandler httpHandler=new HttpHandler();
-            String url1=httpHandler.makeServiceCall(params[0]);
-            return url1;
+//            Su dung HttpUrlConnect
+//            HttpHandler httpHandler=new HttpHandler();
+//            String url1=httpHandler.makeServiceCall(params[0]);
+//            return url1;
+
+            try {
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request.Builder reqBuilder = new Request.Builder();
+                reqBuilder.url(params[0]);
+                Request request = reqBuilder.build();
+                Response response = okHttpClient.newCall(request).execute();
+                String kqTraVe = response.body().string();
+                return kqTraVe;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 
@@ -585,9 +647,23 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            HttpHandler httpHandler=new HttpHandler();
-            String url1=httpHandler.makeServiceCall(params[0]);
-            return url1;
+//            Su dung HttpUrlConnect
+//            HttpHandler httpHandler=new HttpHandler();
+//            String url1=httpHandler.makeServiceCall(params[0]);
+//            return url1;
+
+            try {
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request.Builder reqBuilder = new Request.Builder();
+                reqBuilder.url(params[0]);
+                Request request = reqBuilder.build();
+                Response response = okHttpClient.newCall(request).execute();
+                String kqTraVe = response.body().string();
+                return kqTraVe;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 
@@ -654,9 +730,23 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            HttpHandler httpHandler=new HttpHandler();
-            String url1=httpHandler.makeServiceCall(params[0]);
-            return url1;
+//            Su dung HttpUrlConnect
+//            HttpHandler httpHandler=new HttpHandler();
+//            String url1=httpHandler.makeServiceCall(params[0]);
+//            return url1;
+
+            try {
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request.Builder reqBuilder = new Request.Builder();
+                reqBuilder.url(params[0]);
+                Request request = reqBuilder.build();
+                Response response = okHttpClient.newCall(request).execute();
+                String kqTraVe = response.body().string();
+                return kqTraVe;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 
