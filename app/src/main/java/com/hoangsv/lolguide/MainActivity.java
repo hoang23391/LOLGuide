@@ -177,12 +177,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void addEvents() {
         String versionSP=sharedPreferencesVersion.getString("version","");
-        txtHienThiVersion.setText(versionSP);
         if (versionSP.trim().length()==0){
             SharedPreferences.Editor editor=sharedPreferencesVersion.edit();
             editor.putString("version","7.4.3");
             editor.commit();
         }
+        txtHienThiVersion.setText(versionSP);
 
 
     }
@@ -299,6 +299,7 @@ public class MainActivity extends AppCompatActivity {
                             new DocJSONRune().execute(urlrune);
                         }
                     });
+                    txtHienThiVersion.setText(sharedPreferencesVersion.getString("version",""));
 
                     //textView.setText(sharedPreferencesVersion.getString("version","")+"\n"+versionFromURL);
                 }
