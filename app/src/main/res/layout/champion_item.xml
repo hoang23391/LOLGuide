@@ -5,13 +5,12 @@
     android:layout_height="match_parent">
 
     <ImageView
-        app:srcCompat="@drawable/border150150dark"
         android:id="@+id/imgChampion"
-        android:background="@drawable/default_item"
-        android:layout_gravity="center"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="5dp" />
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        app:srcCompat="@drawable/default_item" />
 
     <TextView
         android:text="Champion Name"

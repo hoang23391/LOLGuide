@@ -1,10 +1,6 @@
 package com.hoangsv.adapter;
 
 import android.app.Activity;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hoangsv.lolguide.R;
+import com.hoangsv.lt.RoundedTransformation;
 import com.hoangsv.model.Champion;
+import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -47,16 +43,30 @@ public class ChampionAdapter extends ArrayAdapter<Champion> {
         Champion champion=this.objects.get(position);
         txtChampionName.setText(champion.getName());
 
-        AssetManager assetManager = context.getAssets();
+        Picasso.with(context)
+                .load("file:///android_asset/app/champion/"+champion.getImage())
+                .transform(new RoundedTransformation(160, 4))
+                .fit()
+                .centerCrop()
+                .into(imgChampion);
 
-        try {
-            InputStream open = assetManager.open("app/champion/"+champion.getImage());
-            Bitmap bitmap = BitmapFactory.decodeStream(open);
-            BitmapDrawable bitmapDrawable= new BitmapDrawable(bitmap);
-            imgChampion.setBackgroundDrawable(bitmapDrawable);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        Picasso.with(yourContext)
+//                .load("...") // Your image source.
+//                .transform(new RoundedTransformation(50, 4))
+//                .fit()  // Fix centerCrop issue: http://stackoverflow.com/a/20824141/1936697
+//                .centerCrop()
+//                .into(yourImageView);
+
+//        AssetManager assetManager = context.getAssets();
+//
+//        try {
+//            InputStream open = assetManager.open("app/champion/"+champion.getImage());
+//            Bitmap bitmap = BitmapFactory.decodeStream(open);
+//            BitmapDrawable bitmapDrawable= new BitmapDrawable(bitmap);
+//            imgChampion.setBackgroundDrawable(bitmapDrawable);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         return row;
     }
 }
