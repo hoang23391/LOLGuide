@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -46,7 +47,9 @@ public class ChampionFreeFragment extends Fragment {
 
     final String DATABASE_NAME="lol.sqlite";
     SQLiteDatabase database;
-    private static String url = "https://na.api.pvp.net/api/lol/na/v1.2/champion?freeToPlay=true&api_key=RGAPI-2a7f3ae1-d188-4a69-bcc4-132f4de02f44";
+    private static String API_KEY = "RGAPI-2a7f3ae1-d188-4a69-bcc4-132f4de02f44";
+
+    private static String url = "https://na.api.pvp.net/api/lol/na/v1.2/champion?freeToPlay=true&api_key="+API_KEY;
     private static String url2 = "https://lienminh.garena.vn/";
     RecyclerView rvChampionFree;
     ArrayList<ChampionFree> dsChampionFree;
@@ -153,15 +156,21 @@ public class ChampionFreeFragment extends Fragment {
         }
 
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                new DocVaLuuJSONVaoSP().execute(url);
-                new JSOUPHTML().execute(url2);
-            }
-        });
-        abc();
-        docJSONTuSP();
+        ConnectivityManager connectivityManager= (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager.getActiveNetworkInfo()!=null){
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    new DocVaLuuJSONVaoSP().execute(url);
+                    new JSOUPHTML().execute(url2);
+                }
+            });
+        }
+        else {
+            docJSONTuSP();
+            docVN();
+        }
 
         rvChampionFree.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
                 rvChampionFree, new ClickListener() {
@@ -260,7 +269,7 @@ public class ChampionFreeFragment extends Fragment {
         }
     }
 
-    private void abc() {
+    private void docVN() {
         for (int i=0;!sharedPreferencesVN.getString("FreeChampionVN"+i,"").equals("");i++){
             ChampionFree championFreeVN=new ChampionFree();
             championFreeVN.setId(sharedPreferencesVN.getString("FreeChampionVN"+i,""));
@@ -340,6 +349,7 @@ public class ChampionFreeFragment extends Fragment {
                 editor.putString("FreeChampion", s);
                 editor.commit();
             }
+            docJSONTuSP();
             //Toast.makeText(RecyclerActivity.this,sharedPreferences.getString("FreeChampion",""),Toast.LENGTH_LONG).show();
         }
 
@@ -429,7 +439,7 @@ public class ChampionFreeFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String s) {
-
+            docVN();
         }
 
         @Override

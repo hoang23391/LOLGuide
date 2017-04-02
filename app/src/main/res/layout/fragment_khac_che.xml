@@ -32,21 +32,38 @@
             android:paddingRight="5dp"
             android:textStyle="normal|bold" />
 
+        <!--<com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/txtDongDoi"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:background="@drawable/tong_quan_title_text"-->
+            <!--android:scrollbarStyle="outsideOverlay"-->
+            <!--ext:documentView_text="@string/dongdoi"-->
+            <!--ext:documentView_disallowInterceptTouch="true"-->
+            <!--ext:documentView_insetPaddingLeft="8dp"-->
+            <!--ext:documentView_insetPaddingRight="8dp"-->
+            <!--ext:documentView_insetPaddingTop="4dp"-->
+            <!--ext:documentView_insetPaddingBottom="4dp"-->
+            <!--ext:documentView_textAlignment="justified"-->
+            <!--ext:documentView_textColor="@android:color/white"-->
+            <!--ext:documentView_textFormat="plain" />-->
+
         <TextView
-            android:text="@string/dongdoi"
+            android:id="@+id/txtDongDoi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtDongDoi"
-            android:background="@drawable/tong_quan_title_text"
-            android:paddingBottom="4dp"
-            android:paddingTop="4dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:textColor="@color/colorWhite"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp" />
+            android:background="@drawable/style_box_kynang"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="@string/dongdoi"
+            android:textColor="@color/colorWhite" />
 
         <TextView
             android:layout_width="match_parent"
@@ -66,12 +83,30 @@
             android:paddingRight="5dp"
             android:textStyle="normal|bold" />
 
+        <!--<com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/txtDoiThu"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:background="@drawable/tong_quan_title_text"-->
+            <!--android:scrollbarStyle="outsideOverlay"-->
+            <!--ext:documentView_text="@string/doithu"-->
+            <!--ext:documentView_disallowInterceptTouch="true"-->
+            <!--ext:documentView_insetPaddingLeft="8dp"-->
+            <!--ext:documentView_insetPaddingRight="8dp"-->
+            <!--ext:documentView_insetPaddingTop="4dp"-->
+            <!--ext:documentView_insetPaddingBottom="4dp"-->
+            <!--ext:documentView_textAlignment="justified"-->
+            <!--ext:documentView_textColor="@android:color/white"-->
+            <!--ext:documentView_textFormat="plain" />-->
+
         <TextView
             android:text="@string/doithu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtDoiThu"
-            android:background="@drawable/tong_quan_title_text"
+            android:background="@drawable/style_box_kynang"
             android:paddingBottom="4dp"
             android:paddingTop="4dp"
             android:paddingLeft="8dp"

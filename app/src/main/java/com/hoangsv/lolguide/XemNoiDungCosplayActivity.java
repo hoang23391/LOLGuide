@@ -44,7 +44,7 @@ public class XemNoiDungCosplayActivity extends FragmentActivity {
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pagerXem);
-        mPager.setPageTransformer(true, new ZoomOutPageTransformer());
+//        mPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
         mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {

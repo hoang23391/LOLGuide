@@ -1,60 +1,81 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ext="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/webview1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
     android:orientation="vertical"
-    tools:context="com.hoangsv.lolguide.TruyenThuyetFragment"
-    android:id="@+id/webview1"
-    android:background="@android:color/background_dark">
+    tools:context="com.hoangsv.lolguide.TruyenThuyetFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
 
     <TextView
+        android:id="@+id/txtTruyenThuyet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtTruyenThuyet"
-        android:textAlignment="gravity"
-        android:text="@string/truyenthuyet"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:paddingLeft="5dp"
-        android:textColor="@android:color/holo_orange_dark"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/back"
-        android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:textSize="16sp"
+        android:paddingLeft="5dp"
         android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:text="@string/truyenthuyet"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="16sp"
         android:textStyle="normal|bold" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/txtTruyenThuyetND"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:background="@drawable/back"-->
+        <!--ext:documentView_disallowInterceptTouch="true"-->
+        <!--ext:documentView_insetPaddingBottom="5dp"-->
+        <!--ext:documentView_insetPaddingLeft="5dp"-->
+        <!--ext:documentView_insetPaddingRight="10dp"-->
+        <!--ext:documentView_insetPaddingTop="5dp"-->
+        <!--ext:documentView_text="@string/noidungtruyenthuyet"-->
+        <!--ext:documentView_textAlignment="justified"-->
+        <!--ext:documentView_textColor="@android:color/white"-->
+        <!--ext:documentView_textFormat="plain" />-->
 
-        <LinearLayout
+    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/txtTruyenThuyetND"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/style_box_kynang"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/noidungtruyenthuyet"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/white" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtTruyenThuyetND"
-                android:textAlignment="gravity"
-                android:text="@string/noidungtruyenthuyet"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:paddingLeft="5dp"
-                android:textColor="@android:color/white"
-                android:background="@drawable/back"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingRight="5dp" />
-        </LinearLayout>
+    </LinearLayout>
     </ScrollView>
 
 
