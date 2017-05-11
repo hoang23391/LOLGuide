@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:fab="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="com.hoangsv.lolguide.ScreenSlidePageFragment">
+    tools:context="com.hoangsv.lolguide.fragment.ScreenSlidePageFragment">
 
 
     <ImageView

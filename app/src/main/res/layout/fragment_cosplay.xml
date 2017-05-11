@@ -2,11 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hoangsv.lolguide.fragment.NewsFragment"
-    android:background="@android:color/background_dark">
+    tools:context="com.hoangsv.lolguide.fragment.CosplayFragment">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvCosplay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rvNews" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/background_dark" />
 </RelativeLayout>

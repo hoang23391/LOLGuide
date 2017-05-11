@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_dark"
     android:orientation="vertical"
-    tools:context="com.hoangsv.lolguide.TruyenThuyetFragment">
+    tools:context="com.hoangsv.lolguide.fragment.TruyenThuyetFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

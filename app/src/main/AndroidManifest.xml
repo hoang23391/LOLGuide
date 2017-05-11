@@ -12,19 +12,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HienThiTuongActivity" />
-        <activity android:name=".ChampionDetailActivity" />
-        <activity android:name=".TrangPhucActivity" />
-        <activity android:name=".ChiTietTrangPhucActivity" />
-        <activity android:name=".XemNoiDungCosplayActivity" />
-        <activity android:name=".XemNoiDungNewsActivity"></activity>
+        <activity android:name=".activity.ChampionDetailActivity" />
+        <activity android:name=".activity.ChiTietTrangPhucActivity" />
+        <activity android:name=".activity.XemNoiDungCosplayActivity" />
+        <activity android:name=".activity.XemNoiDungNewsActivity"></activity>
     </application>
 
 </manifest>
