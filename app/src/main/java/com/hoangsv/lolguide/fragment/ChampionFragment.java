@@ -4,8 +4,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -32,6 +37,38 @@ public class ChampionFragment extends Fragment {
     ArrayList<Champion> dsChampion;
     ChampionAdapter adapterChampion;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_champion, menu);
+        MenuItem searchItem = menu.findItem(R.id.menu_item_search);
+
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //updateItems();
+//                QueryPerferences.setQuery(getActivity(), query);
+                xuLyDocToanBoCSDL(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                xuLyDocToanBoCSDL(newText);
+                return false;
+            }
+        });
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,7 +83,7 @@ public class ChampionFragment extends Fragment {
     }
 
     private void addEvents() {
-        xuLyDocToanBoCSDL();
+        xuLyDocToanBoCSDL(null);
 
         gvTuong1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,14 +112,24 @@ public class ChampionFragment extends Fragment {
                 intent.putExtra("recommended",dsChampion.get(position).getRecommended());
 
                 startActivity(intent);
+                getActivity().overridePendingTransition(0, 0);
             }
         });
     }
 
-    private void xuLyDocToanBoCSDL() {
+    private void xuLyDocToanBoCSDL(String chuoiKiTu) {
         database = Database.initDatabase(getActivity(),DATABASE_NAME);
         dsChampion.clear();
-        Cursor cursor = database.rawQuery("SELECT * FROM ChampionHoangSV",null);
+        Cursor cursor;
+        if (chuoiKiTu==null) {
+            cursor = database.rawQuery("SELECT * FROM ChampionHoangSV", null);
+        }
+        else {
+            cursor = database.rawQuery("SELECT * FROM ChampionHoangSV WHERE key LIKE?", new String[]{"%"+chuoiKiTu+"%"});
+            //LIKE, =
+            //%
+        }
+
         while (cursor.moveToNext())
         {
             String id = cursor.getString(0);

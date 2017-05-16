@@ -2,6 +2,7 @@ package com.hoangsv.lolguide.adapter;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,28 +28,39 @@ public class ChampionAdapter extends ArrayAdapter<Champion> {
 
     public ChampionAdapter(Activity context, int resource, List<Champion> objects) {
         super(context, resource, objects);
-        this.context=context;
-        this.resource=resource;
-        this.objects=objects;
+        this.context = context;
+        this.resource = resource;
+        this.objects = objects;
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater=this.context.getLayoutInflater();
-        View row=inflater.inflate(this.resource,null);
-        TextView txtChampionName= (TextView) row.findViewById(R.id.txtChampionName);
-        ImageView imgChampion= (ImageView) row.findViewById(R.id.imgChampion);
+        LayoutInflater inflater = this.context.getLayoutInflater();
+        View row = inflater.inflate(this.resource, null);
+        TextView txtChampionName = (TextView) row.findViewById(R.id.txtChampionName);
+        ImageView imgChampion = (ImageView) row.findViewById(R.id.imgChampion);
 
-        Champion champion=this.objects.get(position);
+        Champion champion = this.objects.get(position);
         txtChampionName.setText(champion.getName());
+        String imageName = champion.getImage();
 
+        String outFileName = getContext().getApplicationInfo().dataDir + "/champion/" + imageName;
         Picasso.with(context)
-                .load("file:///android_asset/app/champion/"+champion.getImage())
+                .load("file://" + outFileName)
                 .transform(new RoundedTransformation(160, 4))
                 .fit()
                 .centerCrop()
                 .into(imgChampion);
+        Log.d("aChampionAdapter", "load anh vao picasso");
+
+
+//        Picasso.with(context)
+//                .load("file:///android_asset/app/champion/"+champion.getImage())
+//                .transform(new RoundedTransformation(160, 4))
+//                .fit()
+//                .centerCrop()
+//                .into(imgChampion);
 
 //        Picasso.with(yourContext)
 //                .load("...") // Your image source.

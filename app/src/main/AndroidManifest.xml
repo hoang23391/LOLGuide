@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +23,8 @@
         <activity android:name=".activity.ChampionDetailActivity" />
         <activity android:name=".activity.ChiTietTrangPhucActivity" />
         <activity android:name=".activity.XemNoiDungCosplayActivity" />
-        <activity android:name=".activity.XemNoiDungNewsActivity"></activity>
+        <activity android:name=".activity.XemNoiDungNewsActivity" />
+        <activity android:name=".activity.ChiTietItemActivity"></activity>
     </application>
 
 </manifest>

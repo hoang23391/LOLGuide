@@ -64,7 +64,6 @@ public class ChampionDetailActivity extends AppCompatActivity {
 
 
     private void addControls() {
-        tabLayout= (TabLayout) findViewById(R.id.tabsChampionDetail);
         viewPager= (ViewPager) findViewById(R.id.viewpagerChampionDetail);
         tabLayout= (TabLayout) findViewById(R.id.tabsChampionDetail);
         tabLayout.setupWithViewPager(viewPager);
@@ -198,5 +197,12 @@ public class ChampionDetailActivity extends AppCompatActivity {
         adapter.addFragment(trangPhucFragment, "Trang phục");
         adapter.addFragment(truyenThuyetFragment, "Truyền thuyết");
         viewPager.setAdapter(adapter);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
     }
 }

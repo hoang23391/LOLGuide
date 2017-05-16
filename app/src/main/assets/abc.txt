@@ -7,22 +7,22 @@ Champions (Loading Screen Art):
 http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg
 
 Champions (Square):
-http://ddragon.leagueoflegends.com/cdn/7.9.1/img/champion/Aatrox.png
+http://ddragon.leagueoflegends.com/cdn/7.9.2/img/champion/Aatrox.png
 
 Passive Abilities:
-http://ddragon.leagueoflegends.com/cdn/7.9.1/img/passive/Aatrox_Passive.png
+http://ddragon.leagueoflegends.com/cdn/7.9.2/img/passive/Aatrox_Passive.png
 
 Champion Abilities:
-http://ddragon.leagueoflegends.com/cdn/7.9.1/img/spell/AatroxQ.png
+http://ddragon.leagueoflegends.com/cdn/7.9.2/img/spell/AatroxQ.png
 
 Summoner Spells:
-http://ddragon.leagueoflegends.com/cdn/7.9.1/img/spell/SummonerFlash.png
+http://ddragon.leagueoflegends.com/cdn/7.9.2/img/spell/SummonerFlash.png
 
 Items:
-http://ddragon.leagueoflegends.com/cdn/7.9.1/img/item/1001.png
+http://ddragon.leagueoflegends.com/cdn/7.9.2/img/item/1001.png
 
 Masteries:
-http://ddragon.leagueoflegends.com/cdn/7.9.1/img/mastery/6111.png
+http://ddragon.leagueoflegends.com/cdn/7.9.2/img/mastery/6111.png
 
 Runes:
-http://ddragon.leagueoflegends.com/cdn/7.9.1/img/rune/8001.png
+http://ddragon.leagueoflegends.com/cdn/7.9.2/img/rune/8001.png

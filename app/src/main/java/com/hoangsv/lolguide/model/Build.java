@@ -1,16 +1,14 @@
 package com.hoangsv.lolguide.model;
 
-/**
- * Created by User on 3/2/2017.
- */
-
 public class Build {
     private String type, id1, count1, id2, count2, id3, count3, id4, count4, id5, count5, id6, count6;
+    private String image1, image2, image3, image4, image5, image6;
+    private String name, description, gold;
 
     public Build() {
     }
 
-    public Build(String type, String id1, String count1, String id2, String count2, String id3, String count3, String id4, String count4, String id5, String count5, String id6, String count6) {
+    public Build(String type, String id1, String count1, String id2, String count2, String id3, String count3, String id4, String count4, String id5, String count5, String id6, String count6, String image1, String image2, String image3, String image4, String image5, String image6, String name, String description, String gold) {
         this.type = type;
         this.id1 = id1;
         this.count1 = count1;
@@ -24,6 +22,15 @@ public class Build {
         this.count5 = count5;
         this.id6 = id6;
         this.count6 = count6;
+        this.image1 = image1;
+        this.image2 = image2;
+        this.image3 = image3;
+        this.image4 = image4;
+        this.image5 = image5;
+        this.image6 = image6;
+        this.name = name;
+        this.description = description;
+        this.gold = gold;
     }
 
     public String getType() {
@@ -128,5 +135,54 @@ public class Build {
 
     public void setCount6(String count6) {
         this.count6 = count6;
+    }
+
+    public String getImage1() {
+
+        return image1;
+    }
+
+    public void setImage1(String image1) {
+        this.image1 = image1;
+    }
+
+    public String getImage2() {
+        return image2;
+    }
+
+    public void setImage2(String image2) {
+        this.image2 = image2;
+    }
+
+    public String getImage3() {
+        return image3;
+    }
+
+    public void setImage3(String image3) {
+        this.image3 = image3;
+    }
+
+    public String getImage4() {
+        return image4;
+    }
+
+    public void setImage4(String image4) {
+        this.image4 = image4;
+    }
+
+    public String getImage5() {
+        return image5;
+    }
+
+    public void setImage5(String image5) {
+        this.image5 = image5;
+    }
+
+    public String getImage6() {
+        return image6;
+    }
+
+    public void setImage6(String image6) {
+        this.image6 = image6;
     }
 }

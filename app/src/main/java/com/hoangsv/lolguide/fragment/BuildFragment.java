@@ -102,7 +102,7 @@ public class BuildFragment extends Fragment {
                     String imageDo = cursor.getString(8);
                     JSONObject jsonObjectNew = new JSONObject(imageDo);
                     String anhDo = jsonObjectNew.getString("full");
-                    build.setId1(anhDo);
+                    build.setImage1(anhDo);
 
                 }
                 if (1<jsonArraySon1.length()){
@@ -116,7 +116,7 @@ public class BuildFragment extends Fragment {
                     String imageDo = cursor.getString(8);
                     JSONObject jsonObjectNew = new JSONObject(imageDo);
                     String anhDo = jsonObjectNew.getString("full");
-                    build.setId2(anhDo);
+                    build.setImage2(anhDo);
 
                 }
                 if (2<jsonArraySon1.length()){
@@ -130,7 +130,7 @@ public class BuildFragment extends Fragment {
                     String imageDo = cursor.getString(8);
                     JSONObject jsonObjectNew = new JSONObject(imageDo);
                     String anhDo = jsonObjectNew.getString("full");
-                    build.setId3(anhDo);
+                    build.setImage3(anhDo);
 
                 }
                 if (3<jsonArraySon1.length()){
@@ -144,7 +144,7 @@ public class BuildFragment extends Fragment {
                     String imageDo = cursor.getString(8);
                     JSONObject jsonObjectNew = new JSONObject(imageDo);
                     String anhDo = jsonObjectNew.getString("full");
-                    build.setId4(anhDo);
+                    build.setImage4(anhDo);
 
                 }
                 if (4<jsonArraySon1.length()){
@@ -158,7 +158,7 @@ public class BuildFragment extends Fragment {
                     String imageDo = cursor.getString(8);
                     JSONObject jsonObjectNew = new JSONObject(imageDo);
                     String anhDo = jsonObjectNew.getString("full");
-                    build.setId5(anhDo);
+                    build.setImage5(anhDo);
 
                 }
                 if (5<jsonArraySon1.length()){
@@ -172,7 +172,7 @@ public class BuildFragment extends Fragment {
                     String imageDo = cursor.getString(8);
                     JSONObject jsonObjectNew = new JSONObject(imageDo);
                     String anhDo = jsonObjectNew.getString("full");
-                    build.setId6(anhDo);
+                    build.setImage6(anhDo);
 
                 }
                 dsBuild.add(build);

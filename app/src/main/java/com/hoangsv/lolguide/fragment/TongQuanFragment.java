@@ -21,7 +21,7 @@ import org.json.JSONObject;
 public class TongQuanFragment extends Fragment {
 
     ImageView imgChampionTQ, imgAnhNT, imgAnhQ, imgAnhW, imgAnhE, imgAnhR;
-    TextView txtChampionNameTQ,txtChampionTitleTQ, txtChampionTagsTQ, txtHP, txtHPRegen, txtMP, txtMPRegen, txtArmor,
+    TextView txtChampionNameTQ, txtChampionTitleTQ, txtChampionTagsTQ, txtHP, txtHPRegen, txtMP, txtMPRegen, txtArmor,
             txtSpellBlock, txtAttackDamage, txtAttackSpeed, txtAttackRange, txtCrit, txtMoveSpeed, txtTenNT, txtPhimTatNT,
             txtNoiDungNT, txtTenQ, txtTenW, txtTenE, txtTenR, txtPhimTatQ, txtPhimTatW, txtPhimTatE, txtPhimTatR, txtNoiDungQ,
             txtNoiDungW, txtNoiDungE, txtNoiDungR;
@@ -32,25 +32,25 @@ public class TongQuanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tong_quan, container, false);
-        imgChampionTQ= (ImageView) v.findViewById(R.id.imgChampionTQ);
-        progressBarChampionKiem= (ProgressBar) v.findViewById(R.id.progressBarChampionKiem);
-        progressBarChampionCong= (ProgressBar) v.findViewById(R.id.progressBarChampionCong);
-        progressBarChampionLua= (ProgressBar) v.findViewById(R.id.progressBarChampionLua);
-        progressBarChampionLen= (ProgressBar) v.findViewById(R.id.progressBarChampionLen);
-        txtChampionNameTQ= (TextView) v.findViewById(R.id.txtChampionNameTQ);
-        txtChampionTitleTQ= (TextView) v.findViewById(R.id.txtChampionTitleTQ);
-        txtChampionTagsTQ= (TextView) v.findViewById(R.id.txtChampionTagsTQ);
-        txtHP= (TextView) v.findViewById(R.id.txtHP);
-        txtHPRegen= (TextView) v.findViewById(R.id.txtHPRegen);
-        txtMP= (TextView) v.findViewById(R.id.txtMP);
-        txtMPRegen= (TextView) v.findViewById(R.id.txtMPRegen);
-        txtArmor= (TextView) v.findViewById(R.id.txtArmor);
-        txtSpellBlock= (TextView) v.findViewById(R.id.txtSpellBlock);
-        txtAttackDamage= (TextView) v.findViewById(R.id.txtAttackDamage);
-        txtAttackSpeed= (TextView) v.findViewById(R.id.txtAttackSpeed);
-        txtAttackRange= (TextView) v.findViewById(R.id.txtAttackRange);
-        txtCrit= (TextView) v.findViewById(R.id.txtCrit);
-        txtMoveSpeed= (TextView) v.findViewById(R.id.txtMoveSpeed);
+        imgChampionTQ = (ImageView) v.findViewById(R.id.imgChampionTQ);
+        progressBarChampionKiem = (ProgressBar) v.findViewById(R.id.progressBarChampionKiem);
+        progressBarChampionCong = (ProgressBar) v.findViewById(R.id.progressBarChampionCong);
+        progressBarChampionLua = (ProgressBar) v.findViewById(R.id.progressBarChampionLua);
+        progressBarChampionLen = (ProgressBar) v.findViewById(R.id.progressBarChampionLen);
+        txtChampionNameTQ = (TextView) v.findViewById(R.id.txtChampionNameTQ);
+        txtChampionTitleTQ = (TextView) v.findViewById(R.id.txtChampionTitleTQ);
+        txtChampionTagsTQ = (TextView) v.findViewById(R.id.txtChampionTagsTQ);
+        txtHP = (TextView) v.findViewById(R.id.txtHP);
+        txtHPRegen = (TextView) v.findViewById(R.id.txtHPRegen);
+        txtMP = (TextView) v.findViewById(R.id.txtMP);
+        txtMPRegen = (TextView) v.findViewById(R.id.txtMPRegen);
+        txtArmor = (TextView) v.findViewById(R.id.txtArmor);
+        txtSpellBlock = (TextView) v.findViewById(R.id.txtSpellBlock);
+        txtAttackDamage = (TextView) v.findViewById(R.id.txtAttackDamage);
+        txtAttackSpeed = (TextView) v.findViewById(R.id.txtAttackSpeed);
+        txtAttackRange = (TextView) v.findViewById(R.id.txtAttackRange);
+        txtCrit = (TextView) v.findViewById(R.id.txtCrit);
+        txtMoveSpeed = (TextView) v.findViewById(R.id.txtMoveSpeed);
         imgAnhNT = (ImageView) v.findViewById(R.id.imgAnhNT);
         btnNT = (Button) v.findViewById(R.id.btnNT);
         txtTenNT = (TextView) v.findViewById(R.id.txtTenNT);
@@ -79,9 +79,9 @@ public class TongQuanFragment extends Fragment {
 
         // Inflate the layout for this fragment
 
-        Bundle bundle=getArguments();
-        String image = bundle.getString("image1");
-        Picasso.with(getActivity()).load("file:///android_asset/app/champion/"+image).into(imgChampionTQ);
+        Bundle bundle = getArguments();
+        String image = getContext().getApplicationInfo().dataDir + "/champion/" + bundle.getString("image1");
+        Picasso.with(getActivity()).load("file://" + image).into(imgChampionTQ);
         String name = bundle.getString("name1");
         txtChampionNameTQ.setText(name);
         String title = bundle.getString("title1");
@@ -91,7 +91,7 @@ public class TongQuanFragment extends Fragment {
         try {
             JSONArray jsonArrayTags = new JSONArray(tags);
             String tag = "";
-            for (int i=0;i<jsonArrayTags.length();i++){
+            for (int i = 0; i < jsonArrayTags.length(); i++) {
                 tag = tag + jsonArrayTags.get(i).toString() + "  ";
             }
 
@@ -139,16 +139,16 @@ public class TongQuanFragment extends Fragment {
             String spellblock = jsonObject.getString("spellblock");
             String spellblockperlevel = jsonObject.getString("spellblockperlevel");
 
-            txtHP.setText(hp + " (+" +hpperlevel+ ")" );
-            txtHPRegen.setText(hpregen + " (+" +hpregenperlevel+ ")" );
-            txtMP.setText(mp + " (+" +mpperlevel+ ")" );
-            txtMPRegen.setText(mpregen + " (+" +mpregenperlevel+ ")" );
-            txtArmor.setText(armor + " (+" +armorperlevel+ ")" );
-            txtSpellBlock.setText(spellblock + " (+" +spellblockperlevel+ ")" );
-            txtAttackDamage.setText(attackdamage + " (+" +attackdamageperlevel+ ")" );
-            txtAttackSpeed.setText(attackspeedoffset + " (+" +attackspeedperlevel+ ")" );
+            txtHP.setText(hp + " (+" + hpperlevel + ")");
+            txtHPRegen.setText(hpregen + " (+" + hpregenperlevel + ")");
+            txtMP.setText(mp + " (+" + mpperlevel + ")");
+            txtMPRegen.setText(mpregen + " (+" + mpregenperlevel + ")");
+            txtArmor.setText(armor + " (+" + armorperlevel + ")");
+            txtSpellBlock.setText(spellblock + " (+" + spellblockperlevel + ")");
+            txtAttackDamage.setText(attackdamage + " (+" + attackdamageperlevel + ")");
+            txtAttackSpeed.setText(attackspeedoffset + " (+" + attackspeedperlevel + ")");
             txtAttackRange.setText(attackrange);
-            txtCrit.setText(crit + " (+" +critperlevel+ ")" );
+            txtCrit.setText(crit + " (+" + critperlevel + ")");
             txtMoveSpeed.setText(movespeed);
 
         } catch (JSONException e) {
@@ -157,18 +157,19 @@ public class TongQuanFragment extends Fragment {
 
         String passive = bundle.getString("passive1");
         try {
-            JSONObject jsonObject=new JSONObject(passive);
+            JSONObject jsonObject = new JSONObject(passive);
             String nameSkillP = jsonObject.getString("name");
             String description = jsonObject.getString("description");
 
             txtTenNT.setText(nameSkillP);
             txtNoiDungNT.setText(Html.fromHtml(description));
 
-            JSONObject jsonObject1=jsonObject.getJSONObject("image");
+            JSONObject jsonObject1 = jsonObject.getJSONObject("image");
             String full = jsonObject1.getString("full");
             String group = jsonObject1.getString("group");
             //txtPhimTatNT.setText(group);
-            Picasso.with(getActivity()).load("file:///android_asset/app/passive/"+full).into(imgAnhNT);
+            String outFileName = getContext().getApplicationInfo().dataDir + "/passive/" + full;
+            Picasso.with(getActivity()).load("file://" + outFileName).into(imgAnhNT);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -176,84 +177,88 @@ public class TongQuanFragment extends Fragment {
 
         String spells = bundle.getString("spells1");
         try {
-            JSONArray jsonArray=new JSONArray(spells);
-            JSONObject jsonObject=jsonArray.getJSONObject(0);
-            String nameSkillQ=jsonObject.getString("name");
+            JSONArray jsonArray = new JSONArray(spells);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String nameSkillQ = jsonObject.getString("name");
             txtTenQ.setText(nameSkillQ);
-            String description=jsonObject.getString("description");
+            String description = jsonObject.getString("description");
             String loaiTieuHao = jsonObject.getString("costType");
             String tieuHao = jsonObject.getString("costBurn");
             String hoiChieu = jsonObject.getString("cooldownBurn");
             String rangeBurn = jsonObject.getString("rangeBurn");
-            txtNoiDungQ.setText(Html.fromHtml(description+"<br/><br/>"+loaiTieuHao+": "+tieuHao+" "+loaiTieuHao+"<br/>Cooldown: "+hoiChieu+"s<br/>Range: "+rangeBurn));
-            String key=jsonObject.getString("key");
+            txtNoiDungQ.setText(Html.fromHtml(description + "<br/><br/>" + loaiTieuHao + ": " + tieuHao + " " + loaiTieuHao + "<br/>Cooldown: " + hoiChieu + "s<br/>Range: " + rangeBurn));
+            String key = jsonObject.getString("key");
             //txtPhimTatQ.setText(key);
-            JSONObject jsonObject1=jsonObject.getJSONObject("image");
+            JSONObject jsonObject1 = jsonObject.getJSONObject("image");
             String full = jsonObject1.getString("full");
-            Picasso.with(getActivity()).load("file:///android_asset/app/spell/"+full).into(imgAnhQ);
+            String outFileName = getContext().getApplicationInfo().dataDir + "/spell/" + full;
+            Picasso.with(getActivity()).load("file://" + outFileName).into(imgAnhQ);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
         try {
-            JSONArray jsonArray=new JSONArray(spells);
-            JSONObject jsonObject=jsonArray.getJSONObject(1);
-            String nameSkillW=jsonObject.getString("name");
+            JSONArray jsonArray = new JSONArray(spells);
+            JSONObject jsonObject = jsonArray.getJSONObject(1);
+            String nameSkillW = jsonObject.getString("name");
             txtTenW.setText(nameSkillW);
-            String description=jsonObject.getString("description");
+            String description = jsonObject.getString("description");
             String loaiTieuHao = jsonObject.getString("costType");
             String tieuHao = jsonObject.getString("costBurn");
             String hoiChieu = jsonObject.getString("cooldownBurn");
             String rangeBurn = jsonObject.getString("rangeBurn");
-            txtNoiDungW.setText(Html.fromHtml(description+"<br/><br/>"+loaiTieuHao+": "+tieuHao+" "+loaiTieuHao+"<br/>Cooldown: "+hoiChieu+"s<br/>Range: "+rangeBurn));
-            String key=jsonObject.getString("key");
+            txtNoiDungW.setText(Html.fromHtml(description + "<br/><br/>" + loaiTieuHao + ": " + tieuHao + " " + loaiTieuHao + "<br/>Cooldown: " + hoiChieu + "s<br/>Range: " + rangeBurn));
+            String key = jsonObject.getString("key");
             //txtPhimTatW.setText(key);
-            JSONObject jsonObject1=jsonObject.getJSONObject("image");
+            JSONObject jsonObject1 = jsonObject.getJSONObject("image");
             String full = jsonObject1.getString("full");
-            Picasso.with(getActivity()).load("file:///android_asset/app/spell/"+full).into(imgAnhW);
+            String outFileName = getContext().getApplicationInfo().dataDir + "/spell/" + full;
+            Picasso.with(getActivity()).load("file://" + outFileName).into(imgAnhW);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
         try {
-            JSONArray jsonArray=new JSONArray(spells);
-            JSONObject jsonObject=jsonArray.getJSONObject(2);
-            String nameSkillE=jsonObject.getString("name");
+            JSONArray jsonArray = new JSONArray(spells);
+            JSONObject jsonObject = jsonArray.getJSONObject(2);
+            String nameSkillE = jsonObject.getString("name");
             txtTenE.setText(nameSkillE);
-            String description=jsonObject.getString("description");
+            String description = jsonObject.getString("description");
             String loaiTieuHao = jsonObject.getString("costType");
             String tieuHao = jsonObject.getString("costBurn");
             String hoiChieu = jsonObject.getString("cooldownBurn");
             String rangeBurn = jsonObject.getString("rangeBurn");
-            txtNoiDungE.setText(Html.fromHtml(description+"<br/><br/>"+loaiTieuHao+": "+tieuHao+" "+loaiTieuHao+"<br/>Cooldown: "+hoiChieu+"s<br/>Range: "+rangeBurn));
-            String key=jsonObject.getString("key");
+            txtNoiDungE.setText(Html.fromHtml(description + "<br/><br/>" + loaiTieuHao + ": " + tieuHao + " " + loaiTieuHao + "<br/>Cooldown: " + hoiChieu + "s<br/>Range: " + rangeBurn));
+            String key = jsonObject.getString("key");
             //txtPhimTatE.setText(key);
-            JSONObject jsonObject1=jsonObject.getJSONObject("image");
+            JSONObject jsonObject1 = jsonObject.getJSONObject("image");
             String full = jsonObject1.getString("full");
-            Picasso.with(getActivity()).load("file:///android_asset/app/spell/"+full).into(imgAnhE);
+            String outFileName = getContext().getApplicationInfo().dataDir + "/spell/" + full;
+            Picasso.with(getActivity()).load("file://" + outFileName).into(imgAnhE);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
         try {
-            JSONArray jsonArray=new JSONArray(spells);
-            JSONObject jsonObject=jsonArray.getJSONObject(3);
-            String nameSkillR=jsonObject.getString("name");
+            JSONArray jsonArray = new JSONArray(spells);
+            JSONObject jsonObject = jsonArray.getJSONObject(3);
+            String nameSkillR = jsonObject.getString("name");
             txtTenR.setText(nameSkillR);
-            String description=jsonObject.getString("description");
+            String description = jsonObject.getString("description");
             String loaiTieuHao = jsonObject.getString("costType");
             String tieuHao = jsonObject.getString("costBurn");
             String hoiChieu = jsonObject.getString("cooldownBurn");
             String rangeBurn = jsonObject.getString("rangeBurn");
-            txtNoiDungR.setText(Html.fromHtml(description+"<br/><br/>"+loaiTieuHao+": "+tieuHao+" "+loaiTieuHao+"<br/>Cooldown: "+hoiChieu+"s<br/>Range: "+rangeBurn));
-            String key=jsonObject.getString("key");
+            txtNoiDungR.setText(Html.fromHtml(description + "<br/><br/>" + loaiTieuHao + ": " + tieuHao + " " + loaiTieuHao + "<br/>Cooldown: " + hoiChieu + "s<br/>Range: " + rangeBurn));
+            String key = jsonObject.getString("key");
             //txtPhimTatR.setText(key);
-            JSONObject jsonObject1=jsonObject.getJSONObject("image");
+            JSONObject jsonObject1 = jsonObject.getJSONObject("image");
             String full = jsonObject1.getString("full");
-            Picasso.with(getActivity()).load("file:///android_asset/app/spell/"+full).into(imgAnhR);
+            String outFileName = getContext().getApplicationInfo().dataDir + "/spell/" + full;
+            Picasso.with(getActivity()).load("file://" + outFileName).into(imgAnhR);
         } catch (JSONException e) {
             e.printStackTrace();
         }

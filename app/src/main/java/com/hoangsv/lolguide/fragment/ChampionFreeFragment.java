@@ -381,7 +381,7 @@ public class ChampionFreeFragment extends Fragment {
 
                     SharedPreferences.Editor editor = sharedPreferencesVN.edit();
                     editor.putString("FreeChampionVN"+i, b);
-                    editor.commit();
+                    editor.apply();
 
                 }
                 //Log.d("ha1",dsChampionFreeVN.size()+"");

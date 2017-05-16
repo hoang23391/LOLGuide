@@ -22,11 +22,12 @@ public class ChampionFreeAdapter extends RecyclerView.Adapter<ChampionFreeAdapte
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.imgChampionFree) ImageView imgChampionFree;
+        @BindView(R.id.imgChampionFree)
+        ImageView imgChampionFree;
 
         public ViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this,view);
+            ButterKnife.bind(this, view);
         }
 
         @Override
@@ -49,9 +50,13 @@ public class ChampionFreeAdapter extends RecyclerView.Adapter<ChampionFreeAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ChampionFree championFree=danhSachChampionFree.get(position);
+        ChampionFree championFree = danhSachChampionFree.get(position);
+        String imageName = championFree.getImage();
+        String outFileName = context.getApplicationInfo().dataDir + "/champion/" + imageName;
 
-        Picasso.with(context).load("file:///android_asset/app/champion/"+championFree.getImage()).into(holder.imgChampionFree);
+        Picasso.with(context)
+                .load("file://" + outFileName)
+                .into(holder.imgChampionFree);
 
         /*
         AssetManager assetManager = holder.imgChampionFree.getContext().getAssets();
