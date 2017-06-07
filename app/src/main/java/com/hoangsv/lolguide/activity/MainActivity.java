@@ -31,13 +31,14 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.hoangsv.lolguide.R;
-import com.hoangsv.lolguide.fragment.ChampionFragment;
+import com.hoangsv.lolguide.fragment.ChampionListFragment;
 import com.hoangsv.lolguide.fragment.ChampionFreeFragment;
-import com.hoangsv.lolguide.fragment.LienHeFragment;
+import com.hoangsv.lolguide.fragment.ContactFragment;
 import com.hoangsv.lolguide.fragment.NewsMainFragment;
-import com.hoangsv.lolguide.fragment.SamSoiOthersFragment;
-import com.hoangsv.lolguide.fragment.SamSoiVNFragment;
-import com.hoangsv.lolguide.lt.Database;
+import com.hoangsv.lolguide.fragment.CheckingUserAccountOthersFragment;
+import com.hoangsv.lolguide.fragment.CheckingUserAccountVNFragment;
+import com.hoangsv.lolguide.utility.Constant;
+import com.hoangsv.lolguide.utility.Database;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,21 +60,9 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferencesVersion;
-    final String DATABASE_NAME = "lol.sqlite";
     SQLiteDatabase database;
 
     ProgressDialog mProgressDialog;
-
-    private static String API_KEY = "RGAPI-2a7f3ae1-d188-4a69-bcc4-132f4de02f44";
-
-    private static String urlversion = "https://global.api.riotgames.com/api/lol/static-data/NA/v1.2/versions?api_key=" + API_KEY;
-    private static String url = "https://global.api.riotgames.com/api/lol/static-data/NA/v1.2/champion?champData=all&dataById=true&locale=vn_VN&api_key=" + API_KEY;
-    private static String urlitem = "https://global.api.riotgames.com/api/lol/static-data/NA/v1.2/item?locale=vn_VN&itemListData=all&api_key=" + API_KEY;
-    private static String urlmastery = "https://global.api.riotgames.com/api/lol/static-data/NA/v1.2/mastery?masteryListData=all&locale=vn_VN&api_key=" + API_KEY;
-    private static String urlsummonerspell = "https://global.api.riotgames.com/api/lol/static-data/NA/v1.2/summoner-spell?locale=vn_VN&api_key=" + API_KEY;
-    private static String urlrune = "https://global.api.riotgames.com/api/lol/static-data/NA/v1.2/rune?locale=vn_VN&api_key=" + API_KEY;
-
-
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     NavigationView mNavigationView;
@@ -96,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        new DocVersion().execute(urlversion);
+                        new DocVersion().execute(Constant.URL_VERSION);
                     }
                 });
             } else {
@@ -157,23 +146,20 @@ public class MainActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         return true;
                     case R.id.navigation_item_2:
-                        //Intent intent = new Intent(MainActivity.this,TrangPhucActivity.class);
-                        //startActivity(intent);
-
                         //Snackbar.make(mContentFrame, "Champion", Snackbar.LENGTH_SHORT).show();
                         mCurrentSelectedPosition = 2;
-                        startFragment(new ChampionFragment());
+                        startFragment(new ChampionListFragment());
                         mDrawerLayout.closeDrawers();
                         return true;
                     case R.id.navigation_item_3:
                         mCurrentSelectedPosition = 3;
-                        startFragment(new SamSoiVNFragment());
+                        startFragment(new CheckingUserAccountVNFragment());
                         mDrawerLayout.closeDrawers();
                         return true;
                     case R.id.navigation_item_4:
                         mCurrentSelectedPosition = 4;
                         //mCurrentSelectedPosition = menuItem.getItemId();
-                        startFragment(new SamSoiOthersFragment());
+                        startFragment(new CheckingUserAccountOthersFragment());
                         mDrawerLayout.closeDrawers();
                         return true;
                     case R.id.navigation_item_5:
@@ -183,10 +169,9 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.tttacgia:
                         mCurrentSelectedPosition = 5;
-                        startFragment(new LienHeFragment());
+                        startFragment(new ContactFragment());
                         mDrawerLayout.closeDrawers();
                         return true;
-
                     default:
                         return true;
                 }
@@ -205,14 +190,12 @@ public class MainActivity extends AppCompatActivity {
             editor.commit();
         }
         txtHienThiVersion.setText(versionSP);
-
-
     }
 
     private void addControls() {
 
         sharedPreferencesVersion = getSharedPreferences("version", Context.MODE_PRIVATE);
-        database = Database.initDatabase(MainActivity.this, DATABASE_NAME);
+        database = Database.initDatabase(MainActivity.this, Constant.DATABASE_NAME);
 
         // instantiate it within the onCreate method
         mProgressDialog = new ProgressDialog(MainActivity.this);
@@ -264,7 +247,6 @@ public class MainActivity extends AppCompatActivity {
             mUserLearnedDrawer = true;
             saveSharedSetting(this, PREF_USER_LEARNED_DRAWER, "true");
         }
-
     }
 
     public static void saveSharedSetting(Context ctx, String settingName, String settingValue) {
@@ -303,7 +285,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-
             try {
                 JSONArray root = new JSONArray(s);
                 final String versionFromURL = root.getString(0);
@@ -313,18 +294,17 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("versionFromURL", versionFromURL);
                 editor.apply();
 
-                //kiem tra version, neu khac thi cap nhat
+                // kiểm tra Version, nếu khác thì cập nhật
                 if (!versionSP.equals(versionFromURL)) {
                     mProgressDialog.show();
                     //textView.setText(sharedPreferencesVersion.getString("version","")+"\n"+versionFromURL);
 
                     // có thể sử dụng cách gắn cờ để chạy 1-2-3-4-5 hoặc lệnh này chèn vào onPoseExecute của lệnh khác
-                    new DocJSONChampion().execute(url);
+                    new DocJSONChampion().execute(Constant.URL_CHAMPION_DATA);
 //                    new DocJSONItem().execute(urlitem);
 //                    new DocJSONMastery().execute(urlmastery);
 //                    new DocJSONSummonerSpell().execute(urlsummonerspell);
 //                    new DocJSONRune().execute(urlrune);
-
 
 //                    editor.putString("version", versionFromURL);
 //                    editor.apply();
@@ -344,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-//            Su dung HttpUrlConnect
+                // Sử dụng HttpUrlConnect
 //            HttpHandler httpHandler=new HttpHandler();
 //            String url1=httpHandler.makeServiceCall(params[0]);
 //            return url1;
@@ -417,7 +397,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            new DocJSONItem().execute(urlitem);
+            new DocJSONItem().execute(Constant.URL_ITEM_DATA);
         }
 
         @Override
@@ -507,7 +487,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            new DocJSONMastery().execute(urlmastery);
+            new DocJSONMastery().execute(Constant.URL_MASTERY_DATA);
 
         }
 
@@ -585,7 +565,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            new DocJSONSummonerSpell().execute(urlsummonerspell);
+            new DocJSONSummonerSpell().execute(Constant.URL_SUMMONER_SPELL_DATA);
         }
 
         @Override
@@ -643,7 +623,6 @@ public class MainActivity extends AppCompatActivity {
                 if (count <= 0) {
                     database.insert("DownloadSummonerSpellHoangSV", null, contentValues);
                 } else {
-
                     database.update("DownloadSummonerSpellHoangSV", contentValues, "type=?", new String[]{type});
                 }
 
@@ -662,7 +641,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            new DocJSONRune().execute(urlrune);
+            new DocJSONRune().execute(Constant.URL_RUNE_DATA);
         }
 
         @Override
@@ -700,10 +679,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            //Toast.makeText(MainActivity.this,s,Toast.LENGTH_LONG).show();
-
-            //Toast.makeText(RecyclerActivity.this,sharedPreferences.getString("JSONCHAMPION",""),Toast.LENGTH_LONG).show();
-
             try {
                 JSONObject root = new JSONObject(s);
                 String type, version, data;
@@ -716,12 +691,10 @@ public class MainActivity extends AppCompatActivity {
                 contentValues.put("version", version);
                 contentValues.put("data", data);
 
-
                 int count = database.update("DownloadRuneHoangSV", contentValues, "type=?", new String[]{type});
                 if (count <= 0) {
                     database.insert("DownloadRuneHoangSV", null, contentValues);
                 } else {
-
                     database.update("DownloadRuneHoangSV", contentValues, "type=?", new String[]{type});
                 }
 
@@ -798,11 +771,8 @@ public class MainActivity extends AppCompatActivity {
         if (count <= 0) {
             database.insert("ChampionHoangSV", null, vlXL);
         } else {
-
             database.update("ChampionHoangSV", vlXL, "id=?", new String[]{champXL.getString("id")});
         }
-
-
     }
 
 
@@ -821,16 +791,13 @@ public class MainActivity extends AppCompatActivity {
                 final ArrayList<String> itemUrlList = new ArrayList<>();
                 itemUrlList.add(itemUrl);
 
-
                 for (int i = 0; i < itemUrlList.size(); i++) {
                     new DownloadImage(category1).execute(itemUrlList.get(i));
                 }
 
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
         cursor.close();
     }
@@ -853,11 +820,9 @@ public class MainActivity extends AppCompatActivity {
                 final ArrayList<String> imageUrlList = new ArrayList<>();
                 imageUrlList.add(imageUrl);
 
-
                 for (int i = 0; i < imageUrlList.size(); i++) {
                     new DownloadImage(category1).execute(imageUrlList.get(i));
                 }
-
 
                 JSONObject jsonObjectPassive = new JSONObject(passive);
                 JSONObject jsonObjectPassiveSon = jsonObjectPassive.getJSONObject("image");
@@ -874,7 +839,6 @@ public class MainActivity extends AppCompatActivity {
                     new DownloadImage(category2).execute(passiveUrlList.get(i));
                 }
 
-
                 JSONArray jsonArraySpells = new JSONArray(spells);
                 ArrayList<String> spellNameList = new ArrayList<>();
                 final ArrayList<String> spellUrlList = new ArrayList<>();
@@ -887,11 +851,9 @@ public class MainActivity extends AppCompatActivity {
                     spellUrlList.add(spellUrl);
                 }
 
-
                 for (int i = 0; i < spellUrlList.size(); i++) {
                     new DownloadImage(category3).execute(spellUrlList.get(i));
                 }
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -946,7 +908,6 @@ public class MainActivity extends AppCompatActivity {
                 urlConnection.connect();
                 int file_url_size = urlConnection.getContentLength();
 
-
 //                final URL uri = new URL(urlChampionImage);
 //                URLConnection ucon;
 //
@@ -973,7 +934,6 @@ public class MainActivity extends AppCompatActivity {
 //                            downloadTask.cancel(true);
 //                        }
 //                    });
-
 
                 } else {
                     if (file_url_size != file_local_size) {
@@ -1002,7 +962,6 @@ public class MainActivity extends AppCompatActivity {
         private Context context;
         private PowerManager.WakeLock mWakeLock;
         private String folderName;
-
 
         public DownloadTask(Context context, String folderName) {
             this.context = context;
@@ -1096,7 +1055,6 @@ public class MainActivity extends AppCompatActivity {
                         input.close();
                 } catch (IOException ignored) {
                 }
-
                 if (connection != null)
                     connection.disconnect();
             }
@@ -1106,7 +1064,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void xuLyDocVaGanCSDLChoTungItem(JSONObject itemXL, ContentValues vlXLI) throws JSONException {
-
         if (itemXL.isNull("id")) {
             vlXLI.put("id", "");
         } else {
@@ -1207,7 +1164,6 @@ public class MainActivity extends AppCompatActivity {
         if (count <= 0) {
             database.insert("ItemHoangSV", null, vlXLI);
         } else {
-
             database.update("ItemHoangSV", vlXLI, "id=?", new String[]{itemXL.getString("id")});
         }
     }
@@ -1218,12 +1174,10 @@ public class MainActivity extends AppCompatActivity {
         vlXL.put("name", masteryXL.getString("name"));
         vlXL.put("description", masteryXL.getString("description"));
 
-
         int count = database.update("MasteryHoangSV", vlXL, "id=?", new String[]{masteryXL.getString("id")});
         if (count <= 0) {
             database.insert("MasteryHoangSV", null, vlXL);
         } else {
-
             database.update("MasteryHoangSV", vlXL, "id=?", new String[]{masteryXL.getString("id")});
         }
     }
@@ -1236,12 +1190,10 @@ public class MainActivity extends AppCompatActivity {
         vlXLS.put("id", summonerSpellXL.getString("id"));
         vlXLS.put("key", summonerSpellXL.getString("key"));
 
-
         int count = database.update("SummonerSpellHoangSV", vlXLS, "id=?", new String[]{summonerSpellXL.getString("id")});
         if (count <= 0) {
             database.insert("SummonerSpellHoangSV", null, vlXLS);
         } else {
-
             database.update("SummonerSpellHoangSV", vlXLS, "id=?", new String[]{summonerSpellXL.getString("id")});
         }
     }
@@ -1261,9 +1213,7 @@ public class MainActivity extends AppCompatActivity {
         if (count <= 0) {
             database.insert("RuneHoangSV", null, vlXLR);
         } else {
-
             database.update("RuneHoangSV", vlXLR, "id=?", new String[]{runeXL.getString("id")});
         }
     }
-
 }

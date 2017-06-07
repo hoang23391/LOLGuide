@@ -17,9 +17,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.hoangsv.lolguide.R;
-import com.hoangsv.lolguide.activity.XemNoiDungNewsActivity;
+import com.hoangsv.lolguide.activity.WatchNewsContentActivity;
 import com.hoangsv.lolguide.adapter.NewsAdapter;
 import com.hoangsv.lolguide.model.News;
+import com.hoangsv.lolguide.utility.Constant;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -34,9 +35,6 @@ public class NewsFragment extends Fragment {
     ArrayList<News> dsNews;
     NewsAdapter adapterNews;
     RecyclerView.LayoutManager layoutManagerNews;
-
-    private static String url = "https://lienminh.garena.vn/news?t=1488451502&start=0";
-    private static String url2 = "https://lienminh.garena.vn/news";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,7 +67,7 @@ public class NewsFragment extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    new DocXML().execute(url);
+                    new DocXML().execute(Constant.URL_NEWS_1);
                 }
             });
 
@@ -77,7 +75,7 @@ public class NewsFragment extends Fragment {
         rvNews.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rvNews, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Intent intent=new Intent(getActivity(),XemNoiDungNewsActivity.class);
+                Intent intent=new Intent(getActivity(),WatchNewsContentActivity.class);
                 intent.putExtra("link",dsNews.get(position).getLink());
                 startActivity(intent);
             }

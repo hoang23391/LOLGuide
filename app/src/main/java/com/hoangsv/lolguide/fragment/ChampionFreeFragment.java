@@ -24,8 +24,8 @@ import android.widget.ImageView;
 import com.hoangsv.lolguide.R;
 import com.hoangsv.lolguide.activity.ChampionDetailActivity;
 import com.hoangsv.lolguide.adapter.ChampionFreeAdapter;
-import com.hoangsv.lolguide.lt.Database;
-import com.hoangsv.lolguide.lt.HttpHandler;
+import com.hoangsv.lolguide.utility.Constant;
+import com.hoangsv.lolguide.utility.Database;
 import com.hoangsv.lolguide.model.ChampionFree;
 
 import org.json.JSONArray;
@@ -38,14 +38,14 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class ChampionFreeFragment extends Fragment {
 
-    final String DATABASE_NAME="lol.sqlite";
     SQLiteDatabase database;
-    private static String API_KEY = "RGAPI-2a7f3ae1-d188-4a69-bcc4-132f4de02f44";
 
-    private static String url = "https://na.api.pvp.net/api/lol/na/v1.2/champion?freeToPlay=true&api_key="+API_KEY;
-    private static String url2 = "https://lienminh.garena.vn/";
     RecyclerView rvChampionFree;
     ArrayList<ChampionFree> dsChampionFree;
     ChampionFreeAdapter adapterChampionFree;
@@ -95,7 +95,7 @@ public class ChampionFreeFragment extends Fragment {
         adapterChampionFreeVN = new ChampionFreeAdapter(getActivity(),dsChampionFreeVN);
         rvChampionFreeVN.setAdapter(adapterChampionFreeVN);
 
-        database = Database.initDatabase(getActivity(),DATABASE_NAME);
+        database = Database.initDatabase(getActivity(),Constant.DATABASE_NAME);
         addEvents();
         return v;
     }
@@ -105,7 +105,7 @@ public class ChampionFreeFragment extends Fragment {
         if (freeChampionSP.trim().length()==0){
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putString("FreeChampion","{\"champions\":[{\"id\":64,\"active\":true,\"botEnabled\":true,\"freeToPlay\":true,\"botMmEnabled\":true,\"rankedPlayEnabled\":true},{\"id\":40,\"active\":true,\"botEnabled\":false,\"freeToPlay\":true,\"botMmEnabled\":false,\"rankedPlayEnabled\":true},{\"id\":54,\"active\":true,\"botEnabled\":true,\"freeToPlay\":true,\"botMmEnabled\":true,\"rankedPlayEnabled\":true},{\"id\":21,\"active\":true,\"botEnabled\":true,\"freeToPlay\":true,\"botMmEnabled\":true,\"rankedPlayEnabled\":true},{\"id\":267,\"active\":true,\"botEnabled\":false,\"freeToPlay\":true,\"botMmEnabled\":true,\"rankedPlayEnabled\":true},{\"id\":421,\"active\":true,\"botEnabled\":false,\"freeToPlay\":true,\"botMmEnabled\":false,\"rankedPlayEnabled\":true},{\"id\":102,\"active\":true,\"botEnabled\":true,\"freeToPlay\":true,\"botMmEnabled\":true,\"rankedPlayEnabled\":true},{\"id\":134,\"active\":true,\"botEnabled\":false,\"freeToPlay\":true,\"botMmEnabled\":false,\"rankedPlayEnabled\":true},{\"id\":29,\"active\":true,\"botEnabled\":false,\"freeToPlay\":true,\"botMmEnabled\":false,\"rankedPlayEnabled\":true},{\"id\":112,\"active\":true,\"botEnabled\":false,\"freeToPlay\":true,\"botMmEnabled\":false,\"rankedPlayEnabled\":true}]}");
-            editor.commit();
+            editor.apply();
         }
 
 
@@ -115,8 +115,8 @@ public class ChampionFreeFragment extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    new DocVaLuuJSONVaoSP().execute(url);
-                    new JSOUPHTML().execute(url2);
+                    new DocVaLuuJSONVaoSP().execute(Constant.URL_FREE_CHAMPION_NA);
+                    new JSOUPHTML().execute(Constant.URL_FREE_CHAMPION_VN);
                 }
             });
         }
@@ -129,8 +129,6 @@ public class ChampionFreeFragment extends Fragment {
                 rvChampionFree, new ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-                //Toast.makeText(getActivity(), "Single Click on position :"+position, Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getActivity(),ChampionDetailActivity.class);
                 intent.putExtra("id",dsChampionFree.get(position).getId());
                 startActivity(intent);
@@ -158,8 +156,6 @@ public class ChampionFreeFragment extends Fragment {
                 rvChampionFreeVN, new ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-                //Toast.makeText(getActivity(), "Single Click on position :"+position, Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getActivity(),ChampionDetailActivity.class);
                 intent.putExtra("id",dsChampionFreeVN.get(position).getId());
                 startActivity(intent);
@@ -194,7 +190,6 @@ public class ChampionFreeFragment extends Fragment {
                 championFree.setId(son.getString("id"));
                 dsChampionFree.add(championFree);
             }
-
             for (int i=0;i<dsChampionFree.size();i++) {
                 Cursor cursor=database.rawQuery("SELECT * FROM ChampionHoangSV WHERE id=?",new String[]{dsChampionFree.get(i).getId()});
                 while (cursor.moveToNext()){
@@ -211,8 +206,6 @@ public class ChampionFreeFragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    //dsChampionFree.get(i).setId(key);
-                    //dsChampionFree.get(i).setImage(image);
                 }
                 cursor.close();
             }
@@ -245,8 +238,6 @@ public class ChampionFreeFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //dsChampionFree.get(i).setId(key);
-                //dsChampionFree.get(i).setImage(image);
             }
             cursor.close();
         }
@@ -269,7 +260,6 @@ public class ChampionFreeFragment extends Fragment {
                 editor.commit();
             }
             docJSONTuSP();
-            //Toast.makeText(RecyclerActivity.this,sharedPreferences.getString("FreeChampion",""),Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -279,10 +269,18 @@ public class ChampionFreeFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-
-            HttpHandler httpHandler=new HttpHandler();
-            String url1=httpHandler.makeServiceCall(params[0]);
-            return url1;
+            try {
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request.Builder reqBuilder = new Request.Builder();
+                reqBuilder.url(params[0]);
+                Request request = reqBuilder.build();
+                Response response = okHttpClient.newCall(request).execute();
+                String kqTraVe = response.body().string();
+                return kqTraVe;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 
@@ -311,7 +309,6 @@ public class ChampionFreeFragment extends Fragment {
         private GestureDetector gestureDetector;
 
         public RecyclerTouchListener(Context context, final RecyclerView recycleView, final ClickListener clicklistener){
-
             this.clicklistener=clicklistener;
             gestureDetector=new GestureDetector(context,new GestureDetector.SimpleOnGestureListener(){
                 @Override
@@ -335,7 +332,6 @@ public class ChampionFreeFragment extends Fragment {
             if(child!=null && clicklistener!=null && gestureDetector.onTouchEvent(e)){
                 clicklistener.onClick(child,rv.getChildAdapterPosition(child));
             }
-
             return false;
         }
 
@@ -377,15 +373,10 @@ public class ChampionFreeFragment extends Fragment {
                     a= element.attr("href");
                     String b = a.replaceAll("\\D+","");
 
-                    //Log.d("ha12",b);
-
                     SharedPreferences.Editor editor = sharedPreferencesVN.edit();
                     editor.putString("FreeChampionVN"+i, b);
                     editor.apply();
-
                 }
-                //Log.d("ha1",dsChampionFreeVN.size()+"");
-
             }
             catch (IOException e) {
                 e.printStackTrace();

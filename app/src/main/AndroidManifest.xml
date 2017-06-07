@@ -20,11 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ChampionDetailActivity" />
-        <activity android:name=".activity.ChiTietTrangPhucActivity" />
-        <activity android:name=".activity.XemNoiDungCosplayActivity" />
-        <activity android:name=".activity.XemNoiDungNewsActivity" />
-        <activity android:name=".activity.ChiTietItemActivity"></activity>
+
+        <activity
+            android:name=".activity.ChampionDetailActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.SkinInformationActivity" />
+        <activity android:name=".activity.WatchCosplayContentActivity" />
+        <activity android:name=".activity.WatchNewsContentActivity" />
+        <activity android:name=".activity.ItemInformationActivity"></activity>
     </application>
 
 </manifest>

@@ -17,9 +17,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.hoangsv.lolguide.R;
-import com.hoangsv.lolguide.activity.XemNoiDungCosplayActivity;
+import com.hoangsv.lolguide.activity.WatchCosplayContentActivity;
 import com.hoangsv.lolguide.adapter.CosplayAdapter;
 import com.hoangsv.lolguide.model.Cosplay;
+import com.hoangsv.lolguide.utility.Constant;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,8 +36,6 @@ public class CosplayFragment extends Fragment {
 
     RecyclerView.LayoutManager layoutManager;
     SharedPreferences sharedPreferencesCP;
-    private static String url = "http://lienminh360.vn/hinh-anh-cosplay/cosplay/feed/";
-    private static String url2 = "http://lienminh360.vn/hinh-anh-cosplay/cosplay";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +66,7 @@ public class CosplayFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new DocXML().execute(url2);
+                new DocXML().execute(Constant.URL_COSPLAY_2);
             }
         });
 
@@ -77,7 +76,7 @@ public class CosplayFragment extends Fragment {
             public void onClick(View view, final int position) {
                 //Values are passing to activity & to fragment as well
                 //Toast.makeText(getActivity(), "Single Click on position :"+position, Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getActivity(),XemNoiDungCosplayActivity.class);
+                Intent intent=new Intent(getActivity(),WatchCosplayContentActivity.class);
                 intent.putExtra("noidung",dsCosplay.get(position).getNoiDung());
 
                 SharedPreferences.Editor editor=sharedPreferencesCP.edit();
@@ -90,7 +89,7 @@ public class CosplayFragment extends Fragment {
                 picture.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(getActivity(),XemNoiDungCosplayActivity.class);
+                        Intent intent=new Intent(getActivity(),WatchCosplayContentActivity.class);
                         intent.putExtra("noidung",dsCosplay.get(position).getNoiDung());
                         startActivity(intent);
                     }
@@ -99,7 +98,7 @@ public class CosplayFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-                Intent intent=new Intent(getActivity(),XemNoiDungCosplayActivity.class);
+                Intent intent=new Intent(getActivity(),WatchCosplayContentActivity.class);
                 intent.putExtra("noidung",dsCosplay.get(position).getNoiDung());
                 startActivity(intent);
             }

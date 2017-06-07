@@ -11,11 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hoangsv.lolguide.R;
-import com.hoangsv.lolguide.lt.RoundedTransformation;
+import com.hoangsv.lolguide.utility.RoundedTransformation;
 import com.hoangsv.lolguide.model.Champion;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by User on 2/20/2017.
@@ -25,6 +28,10 @@ public class ChampionAdapter extends ArrayAdapter<Champion> {
     Activity context;
     int resource;
     List<Champion> objects;
+    @BindView(R.id.imgChampion)
+    ImageView imgChampion;
+    @BindView(R.id.txtChampionName)
+    TextView txtChampionName;
 
     public ChampionAdapter(Activity context, int resource, List<Champion> objects) {
         super(context, resource, objects);
@@ -38,8 +45,9 @@ public class ChampionAdapter extends ArrayAdapter<Champion> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = this.context.getLayoutInflater();
         View row = inflater.inflate(this.resource, null);
-        TextView txtChampionName = (TextView) row.findViewById(R.id.txtChampionName);
-        ImageView imgChampion = (ImageView) row.findViewById(R.id.imgChampion);
+        ButterKnife.bind(this, row);
+//        TextView txtChampionName = (TextView) row.findViewById(R.id.txtChampionName);
+//        ImageView imgChampion = (ImageView) row.findViewById(R.id.imgChampion);
 
         Champion champion = this.objects.get(position);
         txtChampionName.setText(champion.getName());

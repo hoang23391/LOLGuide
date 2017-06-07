@@ -7,32 +7,31 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.hoangsv.lolguide.R;
 import com.hoangsv.lolguide.adapter.ViewPagerAdapter;
 import com.hoangsv.lolguide.fragment.BuildFragment;
-import com.hoangsv.lolguide.fragment.KhacCheFragment;
-import com.hoangsv.lolguide.fragment.TongQuanFragment;
-import com.hoangsv.lolguide.fragment.TrangPhucFragment;
-import com.hoangsv.lolguide.fragment.TruyenThuyetFragment;
-import com.hoangsv.lolguide.lt.Database;
+import com.hoangsv.lolguide.fragment.CounterFragment;
+import com.hoangsv.lolguide.fragment.OverviewFragment;
+import com.hoangsv.lolguide.fragment.SkinFragment;
+import com.hoangsv.lolguide.fragment.LoreFragment;
+import com.hoangsv.lolguide.utility.Constant;
+import com.hoangsv.lolguide.utility.Database;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ChampionDetailActivity extends AppCompatActivity {
 
-    final String DATABASE_NAME="lol.sqlite";
     SQLiteDatabase database;
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    TongQuanFragment tongQuanFragment;
+    OverviewFragment overviewFragment;
     BuildFragment buildFragment;
-    KhacCheFragment khacCheFragment;
-    TruyenThuyetFragment truyenThuyetFragment;
-    TrangPhucFragment trangPhucFragment;
+    CounterFragment counterFragment;
+    LoreFragment loreFragment;
+    SkinFragment skinFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,18 +69,16 @@ public class ChampionDetailActivity extends AppCompatActivity {
         setupViewPager(viewPager);
 
         Intent intent=getIntent();
+        Bundle bundle = new Bundle();
         if (intent.getStringExtra("id")==null || intent.getStringExtra("lore")==null || intent.getStringExtra("name")==null || intent.getStringExtra("skins")==null){
-            database = Database.initDatabase(this,DATABASE_NAME);
+            database = Database.initDatabase(this, Constant.DATABASE_NAME);
             Cursor cursor = database.rawQuery("SELECT * FROM ChampionHoangSV WHERE id=?",new String[]{intent.getStringExtra("id")});
             cursor.moveToFirst();
-
-            Bundle bundle = new Bundle();
 
             String id = cursor.getString(0);
             String key = cursor.getString(1);
             String name = cursor.getString(2);
             String title = cursor.getString(3);
-
             String image=cursor.getString(4);
             try {
                 JSONObject object=new JSONObject(image);
@@ -90,7 +87,6 @@ public class ChampionDetailActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
             String skins = cursor.getString(5);
             String lore = cursor.getString(6);
             String blurb = cursor.getString(7);
@@ -103,7 +99,6 @@ public class ChampionDetailActivity extends AppCompatActivity {
             String spells = cursor.getString(14);
             String passive = cursor.getString(15);
             String recommended = cursor.getString(16);
-
 
             bundle.putString("id1", id);
             bundle.putString("key1", key);
@@ -122,17 +117,7 @@ public class ChampionDetailActivity extends AppCompatActivity {
             bundle.putString("spells1", spells);
             bundle.putString("passive1", passive);
             bundle.putString("recommended1", recommended);
-
-
-
-            truyenThuyetFragment.setArguments(bundle);
-            trangPhucFragment.setArguments(bundle);
-            tongQuanFragment.setArguments(bundle);
-            khacCheFragment.setArguments(bundle);
-            buildFragment.setArguments(bundle);
-
-        }
-        else {
+        } else {
             String id = intent.getStringExtra("id");
             String key = intent.getStringExtra("key");
             String name = intent.getStringExtra("name");
@@ -151,7 +136,6 @@ public class ChampionDetailActivity extends AppCompatActivity {
             String passive = intent.getStringExtra("passive");
             String recommended = intent.getStringExtra("recommended");
 
-            Bundle bundle = new Bundle();
             bundle.putString("id1", id);
             bundle.putString("key1", key);
             bundle.putString("name1", name);
@@ -169,36 +153,30 @@ public class ChampionDetailActivity extends AppCompatActivity {
             bundle.putString("spells1", spells);
             bundle.putString("passive1", passive);
             bundle.putString("recommended1", recommended);
-            Log.d("cda2",id+key+name+title+image);
-
-            truyenThuyetFragment.setArguments(bundle);
-            trangPhucFragment.setArguments(bundle);
-            tongQuanFragment.setArguments(bundle);
-            khacCheFragment.setArguments(bundle);
-            buildFragment.setArguments(bundle);
-
-
         }
 
-
+        loreFragment.setArguments(bundle);
+        skinFragment.setArguments(bundle);
+        overviewFragment.setArguments(bundle);
+        counterFragment.setArguments(bundle);
+        buildFragment.setArguments(bundle);
 
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        tongQuanFragment = new TongQuanFragment();
+        overviewFragment = new OverviewFragment();
         buildFragment = new BuildFragment();
-        khacCheFragment = new KhacCheFragment();
-        trangPhucFragment = new TrangPhucFragment();
-        truyenThuyetFragment = new TruyenThuyetFragment();
-        adapter.addFragment(tongQuanFragment, "Tổng quan");
-        adapter.addFragment(buildFragment, "Lên đồ");
-        adapter.addFragment(khacCheFragment, "Mẹo");
-        adapter.addFragment(trangPhucFragment, "Trang phục");
-        adapter.addFragment(truyenThuyetFragment, "Truyền thuyết");
+        counterFragment = new CounterFragment();
+        skinFragment = new SkinFragment();
+        loreFragment = new LoreFragment();
+        adapter.addFragment(overviewFragment, getString(R.string.titleOverviewFragment));
+        adapter.addFragment(buildFragment, getString(R.string.titleBuild));
+        adapter.addFragment(counterFragment, getString(R.string.titleCounterFragment));
+        adapter.addFragment(skinFragment, getString(R.string.titleSkinFragment));
+        adapter.addFragment(loreFragment, getString(R.string.titleLoreFragment));
         viewPager.setAdapter(adapter);
     }
-
 
     @Override
     protected void onPause() {
